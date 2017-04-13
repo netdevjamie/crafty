@@ -1,0 +1,24 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+	var dbContextFileName="CraftyDBEntities.Context.cs";
+	var dbContextClassName="CraftyDBEntities"; //May be xxxEntities
+	var generateEdmBuilderHelper=true;
+	var needsIDConvention = false;
+	var generateApiValuesController = true; //controller to help check if the api routing is working using primitive responses
+	var generateODataValuesController = true; //controller to help check if the odata routing is working using primitive responses
+	var addlNamespaces= new string[]{/* "Crafty.CraftyDBEntities" */}; //sample
+	var keyMap = new Dictionary<string,Tuple<string,string>>(){ 
+           {"ApplicationUserIdentities",Tuple.Create<string,string>("Id","string")},
+           {"AspNetUserLogins",Tuple.Create<string,string>("UserId","string")},
+           {"AspNetRoles",Tuple.Create<string,string>("Id","string")},
+           {"AspNetUserClaims",Tuple.Create<string,string>("Id","int")},
+           {"AspNetUsers",Tuple.Create<string,string>("Id","string")},
+           {"DatabaseLogs",Tuple.Create<string,string>("DatabaseLogID","int")},
+           {"ErrorLogs",Tuple.Create<string,string>("ErrorLogID","int")}
+       };
+	var pluralizeControllers=true;
+	var attemptTabSpaceDetection=true;
+#>

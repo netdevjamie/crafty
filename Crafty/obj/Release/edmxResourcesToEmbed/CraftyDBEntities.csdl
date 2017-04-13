@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="craftycodechallenge_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="EquipmentId" />
+    </Key>
+    <Property Name="EquipmentId" Type="Int32" Nullable="false" />
+    <Property Name="EquipmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Equipment" FromRole="Equipment" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Extract">
+    <Key>
+      <PropertyRef Name="ExtractId" />
+    </Key>
+    <Property Name="ExtractId" Type="Int32" Nullable="false" />
+    <Property Name="ExtractName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Extract" FromRole="Extract" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Grain">
+    <Key>
+      <PropertyRef Name="GrainId" />
+    </Key>
+    <Property Name="GrainId" Type="Int32" Nullable="false" />
+    <Property Name="GrainName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Grain" FromRole="Grain" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Hop">
+    <Key>
+      <PropertyRef Name="HopsId" />
+    </Key>
+    <Property Name="HopsId" Type="Int32" Nullable="false" />
+    <Property Name="HopsName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Hops" FromRole="Hops" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="RecipeId" />
+    </Key>
+    <Property Name="RecipeId" Type="Int32" Nullable="false" />
+    <Property Name="RecipeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Brewer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StyleId" Type="Int32" />
+    <Property Name="EquipmentId" Type="Int32" />
+    <Property Name="RecipeTypeId" Type="Int32" />
+    <Property Name="GrainId" Type="Int32" />
+    <Property Name="HopsId" Type="Int32" />
+    <Property Name="Misc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="YeastId" Type="Int32" />
+    <Property Name="WaterId" Type="Int32" />
+    <Property Name="ExtractId" Type="Int32" />
+    <NavigationProperty Name="Equipment" Relationship="Self.FK_Recipe_Equipment" FromRole="Recipe" ToRole="Equipment" />
+    <NavigationProperty Name="Extract" Relationship="Self.FK_Recipe_Extract" FromRole="Recipe" ToRole="Extract" />
+    <NavigationProperty Name="Grain" Relationship="Self.FK_Recipe_Grain" FromRole="Recipe" ToRole="Grain" />
+    <NavigationProperty Name="Hop" Relationship="Self.FK_Recipe_Hops" FromRole="Recipe" ToRole="Hops" />
+    <NavigationProperty Name="RecipeType" Relationship="Self.FK_Recipe_RecipeType" FromRole="Recipe" ToRole="RecipeType" />
+    <NavigationProperty Name="Style" Relationship="Self.FK_Recipe_Style" FromRole="Recipe" ToRole="Style" />
+    <NavigationProperty Name="Water" Relationship="Self.FK_Recipe_Water" FromRole="Recipe" ToRole="Water" />
+    <NavigationProperty Name="Yeast" Relationship="Self.FK_Recipe_Yeast" FromRole="Recipe" ToRole="Yeast" />
+  </EntityType>
+  <EntityType Name="RecipeType">
+    <Key>
+      <PropertyRef Name="RecipeTypeId" />
+    </Key>
+    <Property Name="RecipeTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RecipeTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_RecipeType" FromRole="RecipeType" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Style">
+    <Key>
+      <PropertyRef Name="StyleId" />
+    </Key>
+    <Property Name="StyleId" Type="Int32" Nullable="false" />
+    <Property Name="StyleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Style" FromRole="Style" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Water">
+    <Key>
+      <PropertyRef Name="WaterId" />
+    </Key>
+    <Property Name="WaterId" Type="Int32" Nullable="false" />
+    <Property Name="WaterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Water" FromRole="Water" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Yeast">
+    <Key>
+      <PropertyRef Name="YeastId" />
+    </Key>
+    <Property Name="YeastId" Type="Int32" Nullable="false" />
+    <Property Name="YeastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Yeast" FromRole="Yeast" ToRole="Recipe" />
+  </EntityType>
+  <Association Name="FK_Recipe_Equipment">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="EquipmentId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="EquipmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Extract">
+    <End Role="Extract" Type="Self.Extract" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Extract">
+        <PropertyRef Name="ExtractId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="ExtractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Grain">
+    <End Role="Grain" Type="Self.Grain" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grain">
+        <PropertyRef Name="GrainId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="GrainId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Hops">
+    <End Role="Hops" Type="Self.Hop" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hops">
+        <PropertyRef Name="HopsId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="HopsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_RecipeType">
+    <End Role="RecipeType" Type="Self.RecipeType" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RecipeType">
+        <PropertyRef Name="RecipeTypeId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="RecipeTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Style">
+    <End Role="Style" Type="Self.Style" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Style">
+        <PropertyRef Name="StyleId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="StyleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Water">
+    <End Role="Water" Type="Self.Water" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Water">
+        <PropertyRef Name="WaterId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="WaterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Yeast">
+    <End Role="Yeast" Type="Self.Yeast" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Yeast">
+        <PropertyRef Name="YeastId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="YeastId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="craftycodechallenge_dbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Equipments" EntityType="Self.Equipment" />
+    <EntitySet Name="Extracts" EntityType="Self.Extract" />
+    <EntitySet Name="Grains" EntityType="Self.Grain" />
+    <EntitySet Name="Hops" EntityType="Self.Hop" />
+    <EntitySet Name="Recipes" EntityType="Self.Recipe" />
+    <EntitySet Name="RecipeTypes" EntityType="Self.RecipeType" />
+    <EntitySet Name="Styles" EntityType="Self.Style" />
+    <EntitySet Name="Waters" EntityType="Self.Water" />
+    <EntitySet Name="Yeasts" EntityType="Self.Yeast" />
+    <AssociationSet Name="FK_Recipe_Equipment" Association="Self.FK_Recipe_Equipment">
+      <End Role="Equipment" EntitySet="Equipments" />
+      <End Role="Recipe" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Extract" Association="Self.FK_Recipe_Extract">
+      <End Role="Extract" EntitySet="Extracts" />
+      <End Role="Recipe" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Grain" Association="Self.FK_Recipe_Grain">
+      <End Role="Grain" EntitySet="Grains" />
+      <End Role="Recipe" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Hops" Association="Self.FK_Recipe_Hops">
+      <End Role="Hops" EntitySet="Hops" />
+      <End Role="Recipe" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_RecipeType" Association="Self.FK_Recipe_RecipeType">
+      <End Role="RecipeType" EntitySet="RecipeTypes" />
+      <End Role="Recipe" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Style" Association="Self.FK_Recipe_Style">
+      <End Role="Style" EntitySet="Styles" />
+      <End Role="Recipe" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Water" Association="Self.FK_Recipe_Water">
+      <End Role="Water" EntitySet="Waters" />
+      <End Role="Recipe" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Yeast" Association="Self.FK_Recipe_Yeast">
+      <End Role="Yeast" EntitySet="Yeasts" />
+      <End Role="Recipe" EntitySet="Recipes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

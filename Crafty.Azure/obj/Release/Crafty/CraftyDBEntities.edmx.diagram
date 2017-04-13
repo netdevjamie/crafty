@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d1ae196231fd4e6da720644657d60de0" Name="Diagram1">
+        <EntityTypeShape EntityType="CraftyDBModel.Equipment" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CraftyDBModel.Grain" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CraftyDBModel.Hop" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="CraftyDBModel.Recipe" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CraftyDBModel.RecipeType" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CraftyDBModel.Style" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CraftyDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CraftyDBModel.Water" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="CraftyDBModel.Yeast" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
+        <AssociationConnector Association="CraftyDBModel.FK_Recipe_Equipment" ManuallyRouted="false" />
+        <AssociationConnector Association="CraftyDBModel.FK_Recipe_Grain" ManuallyRouted="false" />
+        <AssociationConnector Association="CraftyDBModel.FK_Recipe_Hops" ManuallyRouted="false" />
+        <AssociationConnector Association="CraftyDBModel.FK_Recipe_RecipeType" ManuallyRouted="false" />
+        <AssociationConnector Association="CraftyDBModel.FK_Recipe_Style" ManuallyRouted="false" />
+        <AssociationConnector Association="CraftyDBModel.FK_Recipe_Water" ManuallyRouted="false" />
+        <AssociationConnector Association="CraftyDBModel.FK_Recipe_Yeast" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

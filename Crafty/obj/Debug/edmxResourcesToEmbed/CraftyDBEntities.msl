@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="craftycodechallenge_dbModelStoreContainer" CdmEntityContainer="craftycodechallenge_dbEntities">
+    <EntitySetMapping Name="Equipments">
+      <EntityTypeMapping TypeName="craftycodechallenge_dbModel.Equipment">
+        <MappingFragment StoreEntitySet="Equipment">
+          <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+          <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Extracts">
+      <EntityTypeMapping TypeName="craftycodechallenge_dbModel.Extract">
+        <MappingFragment StoreEntitySet="Extract">
+          <ScalarProperty Name="ExtractId" ColumnName="ExtractId" />
+          <ScalarProperty Name="ExtractName" ColumnName="ExtractName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grains">
+      <EntityTypeMapping TypeName="craftycodechallenge_dbModel.Grain">
+        <MappingFragment StoreEntitySet="Grain">
+          <ScalarProperty Name="GrainId" ColumnName="GrainId" />
+          <ScalarProperty Name="GrainName" ColumnName="GrainName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hops">
+      <EntityTypeMapping TypeName="craftycodechallenge_dbModel.Hop">
+        <MappingFragment StoreEntitySet="Hops">
+          <ScalarProperty Name="HopsId" ColumnName="HopsId" />
+          <ScalarProperty Name="HopsName" ColumnName="HopsName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recipes">
+      <EntityTypeMapping TypeName="craftycodechallenge_dbModel.Recipe">
+        <MappingFragment StoreEntitySet="Recipe">
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+          <ScalarProperty Name="Brewer" ColumnName="Brewer" />
+          <ScalarProperty Name="StyleId" ColumnName="StyleId" />
+          <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+          <ScalarProperty Name="RecipeTypeId" ColumnName="RecipeTypeId" />
+          <ScalarProperty Name="GrainId" ColumnName="GrainId" />
+          <ScalarProperty Name="HopsId" ColumnName="HopsId" />
+          <ScalarProperty Name="Misc" ColumnName="Misc" />
+          <ScalarProperty Name="YeastId" ColumnName="YeastId" />
+          <ScalarProperty Name="WaterId" ColumnName="WaterId" />
+          <ScalarProperty Name="ExtractId" ColumnName="ExtractId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RecipeTypes">
+      <EntityTypeMapping TypeName="craftycodechallenge_dbModel.RecipeType">
+        <MappingFragment StoreEntitySet="RecipeType">
+          <ScalarProperty Name="RecipeTypeId" ColumnName="RecipeTypeId" />
+          <ScalarProperty Name="RecipeTypeName" ColumnName="RecipeTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Styles">
+      <EntityTypeMapping TypeName="craftycodechallenge_dbModel.Style">
+        <MappingFragment StoreEntitySet="Style">
+          <ScalarProperty Name="StyleId" ColumnName="StyleId" />
+          <ScalarProperty Name="StyleName" ColumnName="StyleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Waters">
+      <EntityTypeMapping TypeName="craftycodechallenge_dbModel.Water">
+        <MappingFragment StoreEntitySet="Water">
+          <ScalarProperty Name="WaterId" ColumnName="WaterId" />
+          <ScalarProperty Name="WaterName" ColumnName="WaterName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Yeasts">
+      <EntityTypeMapping TypeName="craftycodechallenge_dbModel.Yeast">
+        <MappingFragment StoreEntitySet="Yeast">
+          <ScalarProperty Name="YeastId" ColumnName="YeastId" />
+          <ScalarProperty Name="YeastName" ColumnName="YeastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

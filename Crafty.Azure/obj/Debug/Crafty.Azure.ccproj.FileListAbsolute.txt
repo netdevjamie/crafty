@@ -1,0 +1,2 @@
+c:\Users\Jamie\documents\visual studio 2013\Projects\Crafty\Crafty.Azure\bin\Debug\ServiceConfiguration.cscfg
+c:\Users\Jamie\documents\visual studio 2013\Projects\Crafty\Crafty.Azure\bin\Debug\ServiceDefinition.csdef

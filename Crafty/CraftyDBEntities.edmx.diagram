@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d59b9f4adbe04abf941a79a4b8c17d2d" Name="Diagram1">
+        <EntityTypeShape EntityType="craftycodechallenge_dbModel.Equipment" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="craftycodechallenge_dbModel.Extract" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="craftycodechallenge_dbModel.Grain" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="craftycodechallenge_dbModel.Hop" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="craftycodechallenge_dbModel.Recipe" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="craftycodechallenge_dbModel.RecipeType" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="craftycodechallenge_dbModel.Style" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="craftycodechallenge_dbModel.Water" Width="1.5" PointX="0.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="craftycodechallenge_dbModel.Yeast" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
+        <AssociationConnector Association="craftycodechallenge_dbModel.FK_Recipe_Equipment" ManuallyRouted="false" />
+        <AssociationConnector Association="craftycodechallenge_dbModel.FK_Recipe_Extract" ManuallyRouted="false" />
+        <AssociationConnector Association="craftycodechallenge_dbModel.FK_Recipe_Grain" ManuallyRouted="false" />
+        <AssociationConnector Association="craftycodechallenge_dbModel.FK_Recipe_Hops" ManuallyRouted="false" />
+        <AssociationConnector Association="craftycodechallenge_dbModel.FK_Recipe_RecipeType" ManuallyRouted="false" />
+        <AssociationConnector Association="craftycodechallenge_dbModel.FK_Recipe_Style" ManuallyRouted="false" />
+        <AssociationConnector Association="craftycodechallenge_dbModel.FK_Recipe_Water" ManuallyRouted="false" />
+        <AssociationConnector Association="craftycodechallenge_dbModel.FK_Recipe_Yeast" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

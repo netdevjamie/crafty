@@ -1,0 +1,145 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity.Design" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension="generated.cs" #>
+<# DTE Dte;
+	var suggestedNs=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint");
+#>
+<#@ include file="../EnvDteHelper.ttinclude"#>
+<#@ include file="ApiController.Settings.ttinclude"#>
+<# 
+	var indent="    ";
+	if(attemptTabSpaceDetection){
+	
+		var textEditorSettings=Dte.Properties["TextEditor","CSharp"];
+		var useTabs=(bool)textEditorSettings.Item("InsertTabs").Value; 
+		if(useTabs){
+			indent ="\t";
+		} else {
+			var indentSize=(Int16)textEditorSettings.Item("IndentSize").Value;
+			indent = Enumerable.Repeat(" ",indentSize).Aggregate((s1,s2)=>s1+s2);
+		}
+	}
+	
+	var projects = RecurseSolutionProjects(Dte);
+	var q= from p in projects
+			from pi in Descendants(p.ProjectItems.Cast<ProjectItem>(),ce=>ce.ProjectItems.Cast<ProjectItem>())
+			where pi.FileCodeModel!=null
+			select new{p,pi,CodeElements=pi.FileCodeModel.CodeElements.Cast<CodeElement>()};
+	var context= q.First(x=>x.pi.Name==dbContextFileName);
+	var typesToMap = Descendants(context.CodeElements,ce=>ce.Children.Cast<CodeElement>()).OfType<CodeProperty>().OrderBy(x=>x.Name).ToArray();
+	var project=GetProjectContainingT4File(Dte,false);
+	var pluralizationService = PluralizationService.CreateService(new CultureInfo("en-US"));
+#>
+using System.Linq;
+using System.Web.Http.OData;
+
+<#foreach(var ns in addlNamespaces){#>
+using <#=ns#>;
+<#}#>
+<#if(generateApiValuesController||generateODataValuesController){#>
+using System.Collections.Generic;
+<#}#>
+<#if(generateApiValuesController){#>
+using System.Web.Http;
+<#}#>
+using System.Web.Http.OData.Builder;
+
+<# /* using Microsoft.AspNet.Identity.EntityFramework; */ #>
+
+
+namespace <#=suggestedNs#>
+{
+<# if(generateEdmBuilderHelper) { #>
+    public static class ApiControllerHelpers
+    {
+        public static void BuildApiEntities(this ODataConventionModelBuilder builder)
+        {
+
+<# foreach(var tm in typesToMap){ 
+			var singular=pluralizationService.Singularize(tm.Name); 
+			var plural=pluralizationService.Pluralize(tm.Name);
+			var controllerNameBase= pluralizeControllers? plural:singular;
+#>            builder.EntitySet<<#=singular#>>("<#=plural#>"); // <#= tm.Name#>
+<# } #>
+        }
+<# /*end BuildApiEntitiesMethod */ #>
+
+    }<# /* end ApiControllerHelpers class */ #>
+<# } #>
+<#	foreach(var tm in typesToMap){
+	var singular = pluralizationService.Singularize(tm.Name);
+	var plural = pluralizationService.Pluralize(tm.Name);
+	var controllerNameBase = pluralizeControllers? plural:singular;
+
+	var id=singular+( needsIDConvention? "ID":"Id"); // in case your odata or EF context needs the "ID" capitalization instead of "Id"
+	var keyType=keyMap.ContainsKey(tm.Name)?keyMap[tm.Name].Item2:  "int";
+    if(keyMap.ContainsKey(tm.Name)){
+		id= keyMap[tm.Name].Item1;
+	}
+
+#>
+
+    public class <#=controllerNameBase#>Controller : ODataController
+    {
+        readonly <#=dbContextClassName#> _db;
+
+        public <#=tm.Name#>Controller(<#=dbContextClassName#> db)
+        {
+            _db = db;
+        }
+
+        /// GET api/<#=singular#>
+        public IQueryable<<#=singular#>> Get()
+        {
+            return _db.<#=plural#>;
+        }
+
+        // GET api/<#=singular#>/5
+        public <#=singular#> Get(<#=keyType#> id) // <#= tm.Name#>
+        {
+            return _db.<#=plural#>.FirstOrDefault(x => x.<#=id#> == id);
+        }
+
+    }
+<#}#>
+<# if(generateODataValuesController){PushIndent(indent);#>
+
+public class ValuesOController : ODataController
+{
+<#PushIndent(indent);#>    /// GET api/ValuesO
+public IEnumerable<string> Get()
+{
+    return new string[] { "value1OData", "value2OData" };
+}
+
+/// GET api/ValuesO/5
+public string Get(int id)
+{
+    return "OData";
+}
+<#PopIndent();#>
+}
+<#}
+if(generateApiValuesController){ WriteLine(string.Empty);#>
+public class ValuesController : ApiController
+{
+    /// GET api/Values
+    public IEnumerable<string> Get()
+    {
+        return new string[] { "apiValue1", "apiValue2" };
+    }
+
+    /// GET api/Values/5
+    public string Get(int id)
+    {
+        return "apiValue";
+    }
+}
+<#}#>
+}
